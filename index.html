@@ -1,69 +1,109 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width">
-<style>
-html,
-body {
-padding: 0;
-margin: 0;
-background-color: #25275a;
-width: 100%;
-height: 100%;
-}
-.box {
-width: 50px;
-height: 150px;
-}
-.boxes {
-display: flex;
-align-items: center;
-justify-content: center;
-height: 100%;
-}
-.boxes__inner {
-display: flex;
-overflow: hidden;
-height: 165px;
-}
-</style>
-<script src="node_modules/animejs/lib/anime.min.js"></script>
-<title>Anime</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime.js Enhanced Animation</title>
+    <style>
+        html, body {
+            padding: 0;
+            margin: 0;
+            background-color: #25275a;
+            width: 100%;
+            height: 100%;
+        }
+
+        .box {
+            width: 50px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .boxes {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .boxes__inner {
+            display: flex;
+            overflow: hidden;
+            height: 165px;
+        }
+
+        .box h1 {
+            color: white;
+            margin: 0;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 </head>
+
 <body>
-<div class="boxes">
-<div class="boxes__inner">
-<div class="box js-box"></div>
-<div class="box js-box"></div>
-<div class="box js-box"><h1>L</h1></div>
-<div class="box js-box"><h1>o</h1></div>
-<div class="box js-box"><h1>r</h1></div>
-<div class="box js-box"><h1>e</h1></div>
-<div class="box js-box"><h1>n</h1></div>
-<div class="box js-box"><h1>;)</h1></div>
-<div class="box js-box"></div>
-<div class="box js-box"></div>
-</div>
-</div>
-<script>
-const boxesAnimation = window.anime({
-targets: '.js-box',
-translateY: [150, 50],
-backgroundColor: (el, i, t) => {
-const r = 58 + (i * 12);
-const g = 35 + (i * 12);
-const b = 220;
-const color = `rgb(${r}, ${g}, ${b})`;
-return color;
-},
-duration: 900,
-easing: 'easeOutElastic',
-elasticity: 500,
-delay: (el, i, t) => i * 20,
-loop: true,
-direction: 'alternate',
-});
-</script>
+    <div class="boxes">
+        <div class="boxes__inner">
+            <div class="box js-box"></div>
+            <div class="box js-box"></div>
+            <div class="box js-box">
+                <h1>L</h1>
+            </div>
+            <div class="box js-box">
+                <h1>o</h1>
+            </div>
+            <div class="box js-box">
+                <h1>r</h1>
+            </div>
+            <div class="box js-box">
+                <h1>e</h1>
+            </div>
+            <div class="box js-box">
+                <h1>n</h1>
+            </div>
+            <div class="box js-box">
+                <h1>;)</h1>
+            </div>
+            <div class="box js-box"></div>
+            <div class="box js-box"></div>
+        </div>
+    </div>
+
+    <script>
+        // Basic Animation
+        const boxesAnimation = anime({
+            targets: '.js-box',
+            translateY: [150, 50],
+            backgroundColor: (el, i) => {
+                const r = 58 + (i * 12);
+                const g = 35 + (i * 12);
+                const b = 220;
+                return `rgb(${r}, ${g}, ${b})`;
+            },
+            rotate: '1turn',  // New rotation animation
+            scale: [0.5, 1.5],  // New scaling animation
+            opacity: [0, 1],  // New opacity animation
+            duration: 2000,
+            easing: 'easeOutElastic',
+            elasticity: 500,
+            delay: (el, i) => i * 100,
+            loop: true,
+            direction: 'alternate',
+        });
+
+        // Interactivity: Pause and Resume on Click
+        document.querySelectorAll('.js-box').forEach(box => {
+            box.addEventListener('click', () => {
+                if (boxesAnimation.paused) {
+                    boxesAnimation.play();
+                } else {
+                    boxesAnimation.pause();
+                }
+            });
+        });
+    </script>
 </body>
+
 </html>
