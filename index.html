@@ -82,9 +82,8 @@
                 const b = 220;
                 return `rgb(${r}, ${g}, ${b})`;
             },
-            rotate: '1turn',  // New rotation animation
-            scale: [0.5, 1.5],  // New scaling animation
-            opacity: [0, 1],  // New opacity animation
+            scale: [0.5, 1.5],  // Scaling animation
+            opacity: [0, 1],  // Opacity animation
             duration: 2000,
             easing: 'easeOutElastic',
             elasticity: 500,
@@ -96,11 +95,12 @@
         // Interactivity: Pause and Resume on Click
         document.querySelectorAll('.js-box').forEach(box => {
             box.addEventListener('click', () => {
-                if (boxesAnimation.paused) {
-                    boxesAnimation.play();
-                } else {
-                    boxesAnimation.pause();
-                }
+                anime({
+                    targets: box,
+                    rotate: '1turn',  // Rotation animation on click
+                    duration: 1000,
+                    easing: 'easeInOutSine',
+                });
             });
         });
     </script>
